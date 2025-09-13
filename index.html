@@ -330,8 +330,8 @@ button[type="submit"]:hover {
     <button type="submit">✅ Submit</button>
   </form>
 
-  <h2>Growers Detail</h2>
   <button onclick="fetchData()" class="refresh-btn">🔄 Refresh Data</button>
+  <h2>Growers Detail Are Displayed Hear!</h2>
   <div id="dataContainer" class="cards-container"></div>
 
   <script>
@@ -346,7 +346,7 @@ button[type="submit"]:hover {
         method: "POST",
         body: JSON.stringify(formData)
       });
-      alert("✅ Data Submitted!");
+      alert("✅Growers Data Submitted Successfully!");
       this.reset();
       fetchData();
     });
@@ -384,6 +384,7 @@ button[type="submit"]:hover {
     <p><i class="fas fa-user"></i> Grower Name: ${item.gname || "-"}</p>
     <p><i class="fas fa-phone"></i> Phone: ${item.pno || "-"}</p>
     <p><i class="fas fa-map-marker-alt"></i> Address: ${item.location || "-"}</p>
+    <p><i class="fas fa-calendar-alt"></i> Weight/Crate: ${item.appleQuantity || "-"}</p>
     <p><i class="fas fa-user"></i> Khata: ${item.khata || "-"}</p>
     <p><i class="fas fa-user"></i> Challan Name: ${item.cname || "-"}</p>
     <p><i class="fas fa-user"></i> Challan No.: ${item.challanNo || "-"}</p>
@@ -396,6 +397,7 @@ button[type="submit"]:hover {
   const storageSection = document.createElement("div");
   storageSection.className = "card-section";
   storageSection.innerHTML = `
+  <p><i class="fas fa-calendar-alt"></i> Arrival Time: ${item.arrivalTime || "-"}</p>
     <p><i class="fas fa-apple-alt"></i> Variety: <span class="badge badge-variety">${item.variety || "-"}</span></p>
     <p><i class="fas fa-box"></i> Store Crates: ${item.storeCrates || "-"}</p>
     <p><i class="fas fa-box-open"></i> Self Crates: ${item.selfCrates || "-"}</p>
