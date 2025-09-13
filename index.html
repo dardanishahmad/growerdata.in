@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grower Entry Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+   /* ===== Base Styles ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+  min-height: 100vh;
+  color: #333;
+  padding: 20px;
+  background-attachment: fixed;
+  background-size: cover;
+  line-height: 1.5;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  position: relative;
+}
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  margin: 10px auto 0;
+  border-radius: 2px;
+  animation: slideIn 1.2s ease;
+}
+
+/* ===== Form Styles ===== */
+form {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px 30px;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.8s ease;
+}
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 20px 0 15px 0;
+  color: #34495e;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 6px;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== Input Fields ===== */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+.input-group input {
+  width: 100%;
+  padding: 15px 12px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+.input-group input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52,152,219,0.25);
+  background: #fff;
+}
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #777;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background: #fff;
+  padding: 0 6px;
+  border-radius: 3px;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 0.8rem;
+  color: #3498db;
+}
+
+/* ===== Submit Button ===== */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+button[type="submit"]:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== Cards Container ===== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+  animation: fadeUp 1s ease;
+}
+
+/* ===== Card Styles ===== */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.7s ease;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 14px 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 18px 22px;
+}
+
+.card-section {
+  flex: 1 1 150px;
+  min-width: 140px;
+}
+.card-section p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #444;
+}
+.card-section p i {
+  color: #3498db;
+  font-size: 1.1rem;
+  min-width: 22px;
+}
+
+/* ===== Badges ===== */
+.badge {
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: auto;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+.badge-variety { background: #3498db; }
+.badge-quantity { background: #2ecc71; }
+.badge-driver { background: #e67e22; }
+
+/* ===== Refresh Button ===== */
+.refresh-btn {
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 14px 28px;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+.refresh-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(46,204,113,0.5);
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  form { padding: 20px; }
+  .card-body { gap: 15px; }
+  h2 { font-size: 1.6rem; }
+}
+@media(max-width:480px){
+  .card-body { flex-direction: column; }
+  .card-section { min-width: 100%; }
+  button[type="submit"], .refresh-btn { font-size: 1rem; padding: 12px; }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideIn {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>Grower Entry Form</h2>
+  <form id="growerForm">
+    <div class="section-title">Grower Details</div>
+
+    <div class="input-group">
+      <input type="text" id="grNumber" name="grNumber" required placeholder=" ">
+      <label for="grNumber">GR Number</label>
+    </div>
+    <div class="input-group">
+      <input type="date" id="date" name="date" required>
+      <label for="date">Date</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="refParty" name="refParty" required placeholder=" ">
+      <label for="refParty">Ref. / Main Party</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="gname" name="gname" required placeholder=" ">
+      <label for="gname">Grower Name</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="pno" name="pno" required placeholder=" ">
+      <label for="pno">Phone Number</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="location" name="location" required placeholder=" ">
+      <label for="location">Address</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="cname" name="cname" required placeholder=" ">
+      <label for="cname">Challan Name</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="challanNo" name="challanNo" required placeholder=" ">
+      <label for="challanNo">Challan Number</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="khata" name="khata" required placeholder=" ">
+      <label for="khata">Khata</label>
+    </div>
+    <div class="input-group">
+      <input type="number" id="appleQuantity" name="appleQuantity" placeholder=" ">
+      <label for="appleQuantity">Apple Quantity (kg)</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="driverName" name="driverName" required placeholder=" ">
+      <label for="driverName">Driver Name</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="vehicleNumber" name="vehicleNumber" required placeholder=" ">
+      <label for="vehicleNumber">Vehicle Number</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="dcontact" name="dcontact" required placeholder=" ">
+      <label for="dcontact">Driver Contact</label>
+    </div>
+    <div class="input-group">
+      <input type="datetime-local" id="arrivalTime" name="arrivalTime" required>
+      <label for="arrivalTime">Arrival Date/Time</label>
+    </div>
+
+    <div class="section-title">Storage Details</div>
+    <div class="input-group">
+      <input type="text" id="variety" name="variety" required placeholder=" ">
+      <label for="variety">Variety</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="storeCrates" name="storeCrates" required placeholder=" ">
+      <label for="storeCrates">Store Crates</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="selfCrates" name="selfCrates" required placeholder=" ">
+      <label for="selfCrates">Self Crates</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="paties" name="paties" placeholder=" ">
+      <label for="paties">Paties</label>
+    </div>
+    <div class="input-group">
+      <input type="text" id="totalQuality" name="totalQuality" required placeholder=" ">
+      <label for="totalQuality">Total Quantity</label>
+    </div>
+
+    <button type="submit">✅ Submit</button>
+  </form>
+
+  <h2>Stored Grower Data</h2>
+  <button onclick="fetchData()" class="refresh-btn">🔄 Refresh Data</button>
+  <div id="dataContainer" class="cards-container"></div>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwRpo0VfAfPbU87RAMG5Rq1AZ0Gtgz3JYtyIP0P4mSH_LPAjPqMdWQunttjk5ZRvpXGxQ/exec";
+
+    document.addEventListener("DOMContentLoaded", fetchData);
+
+    document.getElementById("growerForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+      const formData = Object.fromEntries(new FormData(this).entries());
+      await fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(formData)
+      });
+      alert("✅ Data Submitted!");
+      this.reset();
+      fetchData();
+    });
+
+    async function fetchData(){
+      const container = document.getElementById("dataContainer");
+      container.innerHTML = `<p style="text-align:center;">Loading...</p>`;
+      try {
+        const res = await fetch(scriptURL);
+        const data = await res.json();
+        container.innerHTML = "";
+
+        if(data.length === 0){
+          container.innerHTML = `<p style="text-align:center;">No data available.</p>`;
+          return;
+        }
+
+        data.forEach(item => {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const header = document.createElement("div");
+  header.className = "card-header";
+  header.textContent = item.gname || "Unknown Grower";
+
+  const body = document.createElement("div");
+  body.className = "card-body";
+
+  const growerSection = document.createElement("div");
+  growerSection.className = "card-section";
+  growerSection.innerHTML = `
+    <p><i class="fas fa-id-card"></i> GR No: ${item.grNumber || "-"}</p>
+    <p><i class="fas fa-calendar-alt"></i> Date: ${item.date || "-"}</p>
+    <p><i class="fas fa-user"></i> Ref Party: ${item.refParty || "-"}</p>
+    <p><i class="fas fa-user"></i> Grower Name: ${item.gname || "-"}</p>
+    <p><i class="fas fa-phone"></i> Phone: ${item.pno || "-"}</p>
+    <p><i class="fas fa-map-marker-alt"></i> Address: ${item.location || "-"}</p>
+    <p><i class="fas fa-user"></i> Khata: ${item.khata || "-"}</p>
+    <p><i class="fas fa-user"></i> Challan Name: ${item.cname || "-"}</p>
+    <p><i class="fas fa-user"></i> Challan No.: ${item.challanNo || "-"}</p>
+    <p><i class="fas fa-user"></i> Ref Party: ${item.refParty || "-"}</p>
+    <p><i class="fas fa-user"></i> Driver Name: ${item.driverName || "-"}</p>
+    <p><i class="fas fa-user"></i> Vechile Number: ${item.vehicleNumber || "-"}</p>
+    <p><i class="fas fa-user"></i> Driver Contact: ${item.dcontact || "-"}</p>
+  `;
+
+  const storageSection = document.createElement("div");
+  storageSection.className = "card-section";
+  storageSection.innerHTML = `
+    <p><i class="fas fa-apple-alt"></i> Variety: <span class="badge badge-variety">${item.variety || "-"}</span></p>
+    <p><i class="fas fa-box"></i> Store Crates: ${item.storeCrates || "-"}</p>
+    <p><i class="fas fa-box-open"></i> Self Crates: ${item.selfCrates || "-"}</p>
+    <p><i class="fas fa-user"></i> Paties: ${item.paties || "-"}</p>
+    <p><i class="fas fa-weight"></i> Total Quantity: <span class="badge badge-quantity">${item.totalQuality || "-"}</span></p>
+  `;
+
+  body.appendChild(growerSection);
+  body.appendChild(storageSection);
+  card.appendChild(header);
+  card.appendChild(body);
+  container.appendChild(card);
+});
+
+      } catch(err){
+        console.error(err);
+        container.innerHTML = `<p style="text-align:center;color:red;">Failed to load data.</p>`;
+      }
+    }
+  </script>
+
+</body>
+</html>
